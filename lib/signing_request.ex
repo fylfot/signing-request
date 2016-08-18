@@ -1,6 +1,10 @@
-defmodule SigningRequest do
+defmodule Plug.SigningRequest do
   require Phoenix.Controller
   require Logger
+
+  def call(conn, signature) do
+    extract_and_check_signature(conn, signature)
+  end
 
   def extract_and_check_signature(conn, signature) do
 
