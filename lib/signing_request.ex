@@ -21,7 +21,7 @@ defmodule SigningRequest do
       Logger.debug("SIG: #{local_signature} <> #{external_signature}")
       conn
         |> Phoenix.Controller.render("signature_failed.json")
-        |> Phoenix.Controller.halt()
+        |> Plug.Conn.halt()
     end
 
     conn
