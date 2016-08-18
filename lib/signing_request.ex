@@ -3,11 +3,11 @@ defmodule Plug.SigningRequest do
   require Logger
 
   def init(opts) do
-    self.assigs[:signature] = opts
+    opts
   end
 
-  def call(conn, _) do
-    extract_and_check_signature(conn, self.assigs[:signature])
+  def call(conn, signature) do
+    extract_and_check_signature(conn, signature)
   end
 
   defp extract_and_check_signature(conn, sig) do
