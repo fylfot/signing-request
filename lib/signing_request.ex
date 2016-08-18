@@ -20,8 +20,8 @@ defmodule SigningRequest do
     unless(not(is_list(external_signature)) && String.equivalent?(local_signature, external_signature)) do
       Logger.debug("SIG: #{local_signature} <> #{external_signature}")
       conn
-        |> render("signature_failed.json")
-        |> halt()
+        |> Phoenix.Controller.render("signature_failed.json")
+        |> Phoenix.Controller.halt()
     end
 
     conn
