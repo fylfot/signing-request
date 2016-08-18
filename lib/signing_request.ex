@@ -17,8 +17,9 @@ defmodule SigningRequest do
     local_signature = String.downcase(:crypto.hash(:md5, Enum.join(list, "")) |> Base.encode64)
     external_signature = headers["x-request-signature"]
 
+    Logger.debug("SIG: #{local_signature} <> #{external_signature}")
     unless(not(is_list(external_signature)) && String.equivalent?(local_signature, external_signature)) do
-      Logger.debug("SIG: #{local_signature} <> #{external_signature}")
+      # Logger.debug("SIG: #{local_signature} <> #{external_signature}")
       conn
         |> Phoenix.Controller.render("signature_failed.json")
         |> Plug.Conn.halt()
