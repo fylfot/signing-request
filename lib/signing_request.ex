@@ -2,20 +2,22 @@ defmodule Plug.SigningRequest do
   require Phoenix.Controller
   require Logger
 
-  def init(_opts) do
+  signature = nil
 
+  def init(opts) do
+    signature = opts
   end
 
-  def call(conn, signature) do
+  def call(conn, _) do
     extract_and_check_signature(conn, signature)
   end
 
-  defp extract_and_check_signature(conn, signature) do
+  defp extract_and_check_signature(conn, sig) do
 
     params = conn.params
     headers = Enum.into(conn.req_headers, %{})
 
-    list = [signature]
+    list = [sig]
     list = for key <- Enum.sort(Map.keys(params)) do
       list = List.insert_at(list, 0, params[key])
       list = List.insert_at(list, 0, key)
