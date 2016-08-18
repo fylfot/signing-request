@@ -1,4 +1,5 @@
 defmodule SigningRequest do
+  require Logger
 
   def extract_and_check_signature(conn, signature) do
 
