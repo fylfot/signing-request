@@ -1,5 +1,5 @@
 defmodule SigningRequest do
-  use Phoenix.Controller
+  require Phoenix.Controller
   require Logger
 
   def extract_and_check_signature(conn, signature) do
