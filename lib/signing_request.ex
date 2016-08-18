@@ -2,14 +2,14 @@ defmodule Plug.SigningRequest do
   require Phoenix.Controller
   require Logger
 
-  signature = nil
+  @signature nil
 
   def init(opts) do
-    signature = opts
+    @signature opts
   end
 
   def call(conn, _) do
-    extract_and_check_signature(conn, signature)
+    extract_and_check_signature(conn, @signature)
   end
 
   defp extract_and_check_signature(conn, sig) do
